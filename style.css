@@ -12,7 +12,7 @@ html {
   width: 100%;
   height: 200px;
   background-color:#ccc5b9;
-  background-image: url("img/kontener.jpg");
+  background-image: url("img/12.jpg");
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -33,7 +33,7 @@ a {
 a:hover{
     background-color:aquamarine;
     color: #403d39;
-    padding: 12px; 
+    padding: 13px; 
     
 }
 #home {
