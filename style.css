@@ -1,0 +1,70 @@
+body,
+html {
+  padding: 0px;
+  margin: 0px;
+  height: 100%;
+}
+* {
+  box-sizing: border-box;
+}
+
+.footer {
+  width: 100%;
+  height: 200px;
+  background-color:#ccc5b9;
+  background-image: url("img/kontener.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.nav-bar {
+  overflow: hidden;
+  background-color: rgb(66, 66, 66);
+  padding: 12px;
+}
+a {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 25px;
+  color: rgb(221, 228, 235);
+  padding: 12px;
+  width: 70px;
+  text-decoration: none;
+}
+a:hover{
+    background-color:aquamarine;
+    color: #403d39;
+    padding: 12px;
+    
+}
+#home {
+  background-color: aquamarine;
+  color: black;
+  padding: 13px;
+  
+}
+#kapcsolat {
+}
+
+.szolgaltatasok,
+.ar,
+.rolunk,
+.kapcsolat {
+  background-color: #fffcf2;
+  height: 400px;
+  width: 100%;
+  font-size: larger;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.rolunk {
+  background-color: #ccc5b9;
+}
+
+.ar {
+  background-color: #403d39;
+  color: #fffcf2;
+}
+.kapcsolat {
+  background-color: #252422;
+  color: #fffcf2;
+}
