@@ -15,12 +15,17 @@ html {
   background-image: url("img/12.jpg");
   background-position: center;
   background-repeat: no-repeat;
+  
 }
 
 .nav-bar {
   overflow: hidden;
   background-color: rgb(66, 66, 66);
   padding: 12px;
+  position: sticky;
+  top: 0;
+  
+  
 }
 a {
   font-family: Arial, Helvetica, sans-serif;
@@ -29,6 +34,7 @@ a {
   padding: 12px;
   width: 70px;
   text-decoration: none;
+ 
 }
 a:hover{
     background-color:aquamarine;
@@ -40,6 +46,9 @@ a:hover{
   background-color: aquamarine;
   color: black;
   padding: 13px;
+}
+
+#rendeles {
   
 }
 #kapcsolat {
