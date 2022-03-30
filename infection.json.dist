@@ -1,0 +1,29 @@
+{
+    "timeout": 10,
+    "source": {
+        "directories": [
+            "app/Http/Controllers",
+            "app/Repositories"
+        ],
+        "excludes": [
+            "app/Console/Kernel.php",
+            "app/Contracts",
+            "app/Exceptions/Handler.php",
+            "app/Http/Controllers/Controller.php",
+            "app/Http/Livewire",
+            "app/Http/Middleware",
+            "app/Http/Requests",
+            "app/Http/Kernel.php",
+            "app/Models",
+            "app/Policies",
+            "app/Providers",
+            "app/View"
+        ]
+    },
+    "logs": {
+        "text": "infection.log"
+    },
+    "mutators": {
+        "@default": true
+    }
+}
