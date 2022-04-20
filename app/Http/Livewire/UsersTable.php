@@ -18,7 +18,6 @@ class UsersTable extends DataTableComponent
         'email' => null,
     ];
 
-
     public function configure(): void
     {
         $this->setPrimaryKey('id');
@@ -30,9 +29,17 @@ class UsersTable extends DataTableComponent
             Column::make('ID', 'id')
                 ->sortable(),
             Column::make('Name')
+                ->sortable()
+                ->searchable(),
+            Column::make('E-mail', 'email')
+                ->sortable()
+                ->searchable(),
+            Column::make('Created At')
                 ->sortable(),
-            LinkColumn::make('')
-                ->title(fn($row) => '<i class="fa fa-pen"></i>')
+            Column::make('Updated At')
+                ->sortable(),
+            LinkColumn::make('', 'id')
+                ->title(fn($row) => 'Edit')
                 ->location(fn($row) => route('admin.users.edit', $row)),
         ];
     }
