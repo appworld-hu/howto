@@ -1,0 +1,109 @@
+image: lorisleiva/laravel-docker:8.1
+
+stages:
+  - build
+  - test
+  - deploy
+
+.init_ssh: &init_ssh |
+  eval $(ssh-agent -s)
+  echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+  mkdir -p ~/.ssh
+  chmod 700 ~/.ssh
+  [[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+
+.change_file_permissions: &change_file_permissions |
+  find . -type f -not -path "./vendor/*" -exec chmod 664 {} \;
+  find . -type d -not -path "./vendor/*" -exec chmod 775 {} \;
+
+variables:
+  MYSQL_DATABASE: laravel
+  MYSQL_ROOT_PASSWORD: secret
+  MYSQL_USER: sail
+  MYSQL_PASSWORD: secret
+  MYSQL_HOST: mysql_test
+  DB_HOST: mysql_test
+  DB_DATABASE: laravel
+  DB_USERNAME: sail
+  DB_PASSWORD: secret
+
+composer:
+  stage: build
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}-composer
+    paths:
+      - vendor/
+  artifacts:
+    expire_in: 7 days
+    paths:
+      - vendor/
+      - .env
+  script:
+    - composer install --prefer-dist --no-ansi --no-interaction --quiet --no-progress --no-scripts --optimize-autoloader
+    - cp .env.example .env
+    - php artisan key:generate
+
+npm:
+  stage: build
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}-npm
+    paths:
+      - node_modules/
+  script:
+    - npm install
+    - npm run production
+  artifacts:
+    expire_in: 7 days
+    paths:
+      - node_modules/
+      - public/css/
+      - public/js/
+      - public/mix-manifest.json
+
+code-analysis:
+  stage: test
+  dependencies:
+    - composer
+  script:
+    - composer validate -n --ansi --strict
+    - composer cs
+    - composer sa
+    - composer sc
+
+phpunit:
+  stage: test
+  dependencies:
+    - composer
+    - npm
+  services:
+    - name: mysql:8.0
+      alias: mysql_test
+      command: ["--default-authentication-plugin=mysql_native_password"]
+  script:
+    - php artisan migrate:fresh
+    - composer coverage
+
+staging:
+  stage: deploy
+  script:
+    - *init_ssh
+    - *change_file_permissions
+    - envoy run deploy
+  environment:
+    name: staging
+    url: http://46.101.234.187
+  only:
+    - main
+
+#production:
+#  stage: deploy
+#  script:
+#    - *init_ssh
+#    - *change_file_permissions
+#    - envoy run deploy
+#  environment:
+#    name: production
+#    url: http://v8.com
+#  when: manual
+#  only:
+#    - master

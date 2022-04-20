@@ -13,20 +13,24 @@ use Illuminate\Support\Facades\Hash;
  */
 class UserForm extends AbstractForm
 {
+    public ?string $password = null;
     protected string $viewFolder = 'users';
 
     protected string $routeParent = 'users';
-
-    public ?string $password = null;
 
     protected array $rules = [
         'model.name' => 'required|max:50|min:4',
         'model.email' => 'required|email',
     ];
 
+    public function boot(UserRepositoryInterface $repository): void
+    {
+        $this->repository = $repository;
+    }
+
     protected function rules(): array
     {
-        if($this->model->exists) {
+        if ($this->model->exists) {
             $this->rules['password'] = 'nullable|min:6';
         } else {
             $this->rules['password'] = 'required|min:6';
@@ -35,14 +39,9 @@ class UserForm extends AbstractForm
         return $this->rules;
     }
 
-    public function boot(UserRepositoryInterface $repository): void
-    {
-        $this->repository = $repository;
-    }
-
     protected function save()
     {
-        if(null !== $this->password) {
+        if (null !== $this->password) {
             $this->model->password = Hash::make($this->password);
         }
 
