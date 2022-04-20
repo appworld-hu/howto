@@ -70,7 +70,7 @@
         ],
         "coverage": [
             "@putenv XDEBUG_MODE=coverage",
-            "@php artisan test --coverage --min=9"
+            "@php artisan test --coverage --min=0"
         ],
         "infection": [
             "[ -e build/bin/infection ] || curl -L https://github.com/infection/infection/releases/download/0.25.1/infection.phar -o build/bin/infection && chmod +x build/bin/infection",

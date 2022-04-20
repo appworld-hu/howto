@@ -11,12 +11,11 @@ use Rappasoft\LaravelLivewireTables\Views\Columns\LinkColumn;
 
 class UsersTable extends DataTableComponent
 {
-    protected $model = User::class;
-
     public array $columnSearch = [
         'name' => null,
         'email' => null,
     ];
+    protected $model = User::class;
 
     public function configure(): void
     {
@@ -39,8 +38,8 @@ class UsersTable extends DataTableComponent
             Column::make('Updated At')
                 ->sortable(),
             LinkColumn::make('', 'id')
-                ->title(fn($row) => 'Edit')
-                ->location(fn($row) => route('admin.users.edit', $row)),
+                ->title(static fn ($row) => 'Edit')
+                ->location(static fn ($row) => route('admin.users.edit', $row)),
         ];
     }
 
