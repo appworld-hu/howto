@@ -1,6 +1,6 @@
-# SPD-Shop
+# Shop
 
-A `Shop` egy egyedi fejlesztéső vállalatirányítási és termékmenedzsment rendszer, melynek fő profilja a robogó gyári és tunning alkatrészek árusítása.
+A `Shop` egy egyedi fejlesztéső vállalatirányítási és termékmenedzsment rendszer.
 
 Az alábbiakban a projekt fejlesztését, valamint telepítését részletezzük.
 
