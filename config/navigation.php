@@ -11,4 +11,9 @@ return [
         'route' => 'admin.users.index',
         'icon' => '<i class="fa fa-user"></i>',
     ],
+    [
+        'title' => 'products',
+        'route' => 'admin.products.index',
+        'icon' => '<i class="fa fa-bag-shopping"></i>',
+    ],
 ];
